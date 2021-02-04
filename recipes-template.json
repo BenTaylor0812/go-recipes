@@ -1,0 +1,104 @@
+[
+   {
+      "id": 0,
+      "name": "",
+      "ingredients": [
+         {
+            "name": "",
+            "amount": 0,
+            "units": ""
+         },
+         {
+            "name": "",
+            "amount": 0,
+            "units": ""
+         }
+      ],
+      "steps": [
+         {
+            "step": 1,
+            "title": "",
+            "text": "",
+            "timers": [
+               {
+                  "title": "",
+                  "time": 0
+               },
+               {
+                  "title": "",
+                  "time": 0
+               }
+            ]
+         },
+         {
+            "step": 2,
+            "title": "",
+            "text": "",
+            "timers": []
+         }
+      ]
+   },
+   {
+      "id": 99,
+      "name": "",
+      "ingredients": [
+         {
+            "name": "",
+            "amount": 0,
+            "units": ""
+         },
+         {
+            "name": "",
+            "amount": 0,
+            "units": ""
+         }
+      ],
+      "steps": [
+         {
+            "step": 1,
+            "title": "",
+            "text": "",
+            "timers": [
+               {
+                  "title": "",
+                  "time": 0
+               },
+               {
+                  "title": "",
+                  "time": 0
+               }
+            ]
+         },
+         {
+            "step": 2,
+            "title": "",
+            "text": "",
+            "timers": []
+         },
+         {
+            "step": 3,
+            "title": "",
+            "text": "",
+            "timers": []
+         },
+         {
+            "step": 4,
+            "title": "",
+            "text": "",
+            "timers": []
+         },
+         {
+            "step": 5,
+            "title": "",
+            "text": "",
+            "timers": []
+         },
+         {
+            "step": 6,
+            "title": "",
+            "text": "",
+            "timers": []
+         }
+      ]
+   }
+]
