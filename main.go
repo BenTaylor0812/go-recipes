@@ -11,6 +11,11 @@ import (
 	"strings"
 )
 
+const (
+	askAgain bool = true
+	endHere  bool = false
+)
+
 type recipe struct {
 	ID          int    `json:"id"`
 	Name        string `json:"name"`
@@ -30,6 +35,8 @@ type recipe struct {
 	} `json:"steps"`
 }
 
+var recipes []recipe
+
 var replaceStr string
 
 func getInput() string {
@@ -39,19 +46,20 @@ func getInput() string {
 	return strings.Replace(text, replaceStr, "", -1)
 }
 
-func main() {
-	setUp()
-
-	recipes := loadRecipes()
-	// recipeMain(recipes)
-	getShoppingList(recipes, 1, 2)
-}
-
 func setUp() {
 	if runtime.GOOS == "windows" {
 		replaceStr = "\r\n"
 	} else {
 		replaceStr = "\n"
+	}
+}
+
+func main() {
+	setUp()
+
+	recipes = loadRecipes()
+	for recipeMain() {
+
 	}
 }
 
@@ -73,12 +81,13 @@ func loadRecipes() []recipe {
 	return recipes
 }
 
-func recipeMain(recipes []recipe) {
+func recipeMain() bool {
 	fmt.Println(
 		`===Options===
-		1) Generate random recipes
-		2) View recipes
-		3) Choose Recipes`,
+1) Generate random recipes
+2) View recipes
+3) Choose Recipes
+4) Quit`,
 	)
 
 	text := getInput()
@@ -91,10 +100,13 @@ func recipeMain(recipes []recipe) {
 		viewRecipes()
 	case 3:
 		chooseRecipes()
+	case 4:
+		return endHere
 	}
+	return askAgain
 }
 
-func listRecipes(recipes []recipe) int {
+func listRecipes() int {
 	fmt.Println("Which recipe do you want to view?")
 	for _, k := range recipes {
 		fmt.Println(k.ID, "-", k.Name)
@@ -110,7 +122,7 @@ func listRecipes(recipes []recipe) int {
 	return choice
 }
 
-func getShoppingList(recipes []recipe, ids ...int) {
+func getShoppingList(ids ...int) {
 	var ingredients = make(map[string]int)
 	for _, id := range ids {
 		for _, recipe := range recipes {
@@ -130,7 +142,9 @@ func generateRandomRecipes() {
 }
 
 func viewRecipes() {
-
+	for _, k := range recipes {
+		fmt.Println(k.ID, "-", k.Name)
+	}
 }
 
 func chooseRecipes() {
