@@ -4,8 +4,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"math/rand"
 	"os"
 	"strconv"
+	"time"
 
 	"github.com/go-recipes/common"
 )
@@ -83,8 +85,48 @@ func getShoppingList(ids ...int) {
 	fmt.Println(ingredients)
 }
 
-func generateRandomRecipes() {
+func getRandomRecipes(choice int) []int {
+	counter := choice
+	var randomList []int
+	rand.Seed(time.Now().UnixNano())
+	for counter != 0 {
+		randomNumber := rand.Intn(choice)
+		if common.CheckInSlice(randomNumber, randomList) {
+			continue
+		}
+		randomList = append(randomList, randomNumber)
+		counter--
+	}
+	return randomList
+}
 
+func generateRandomRecipes() {
+	maxNumber := 3
+	successful := false
+	var recipeIDList []int
+	fmt.Println("How many recipes do you want?")
+
+	for !successful {
+		text := common.GetInput()
+		choice, _ := strconv.Atoi(text)
+		switch {
+		case choice > maxNumber:
+			fmt.Println("Choice is too large, please enter again")
+		case choice < 1:
+			fmt.Println("You must have at least one recipe.")
+		default:
+			recipeIDList = getRandomRecipes(choice)
+			successful = true
+		}
+	}
+	for _, k := range recipeIDList {
+		for _, r := range Recipes {
+			if r.ID == k {
+				fmt.Println(r.ID, "-", r.Name)
+			}
+		}
+	}
+	getShoppingList(recipeIDList...)
 }
 
 func viewRecipes() {

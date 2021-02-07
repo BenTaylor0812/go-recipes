@@ -28,3 +28,13 @@ func GetInput() string {
 	// convert CRLF to LF
 	return strings.Replace(text, ReplaceStr, "", -1)
 }
+
+func CheckInSlice(element int, list []int) bool {
+	isInSlice := false
+	for _, k := range list {
+		if k == element {
+			isInSlice = true
+		}
+	}
+	return isInSlice
+}
