@@ -6,9 +6,10 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
-	"runtime"
 	"strconv"
 	"strings"
+
+	"recipes/common"
 )
 
 const (
@@ -37,25 +38,15 @@ type recipe struct {
 
 var recipes []recipe
 
-var replaceStr string
-
 func getInput() string {
 	reader := bufio.NewReader(os.Stdin)
 	text, _ := reader.ReadString('\n')
 	// convert CRLF to LF
-	return strings.Replace(text, replaceStr, "", -1)
-}
-
-func setUp() {
-	if runtime.GOOS == "windows" {
-		replaceStr = "\r\n"
-	} else {
-		replaceStr = "\n"
-	}
+	return strings.Replace(text, common.ReplaceStr, "", -1)
 }
 
 func main() {
-	setUp()
+	common.SetUp()
 
 	recipes = loadRecipes()
 	for recipeMain() {
